@@ -43,3 +43,63 @@ test("turns spacecraft down from N direction", () => {
   spacecraft.move("d");
   expect(spacecraft.direction).toBe("D");
 });
+
+test("moves lunar spacecraft forward when direction is E", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "E");
+  spacecraft.move("f");
+  expect(spacecraft.x).toBe(1);
+});
+
+test("moves lunar spacecraft backward when direction is E", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "E");
+  spacecraft.move("b");
+  expect(spacecraft.x).toBe(-1);
+});
+
+test("moves lunar spacecraft forward when direction is S", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "S");
+  spacecraft.move("f");
+  expect(spacecraft.y).toBe(-1);
+});
+
+test("moves lunar spacecraft backward when direction is S", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "S");
+  spacecraft.move("b");
+  expect(spacecraft.y).toBe(1);
+});
+
+test("moves lunar spacecraft forward when direction is W", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "W");
+  spacecraft.move("f");
+  expect(spacecraft.x).toBe(-1);
+});
+
+test("moves lunar spacecraft backward when direction is W", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "W");
+  spacecraft.move("b");
+  expect(spacecraft.x).toBe(1);
+});
+
+test("moves lunar spacecraft forward when direction is U", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "U");
+  spacecraft.move("f");
+  expect(spacecraft.z).toBe(1);
+});
+
+test("moves lunar spacecraft backward when direction is U", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "U");
+  spacecraft.move("b");
+  expect(spacecraft.z).toBe(-1);
+});
+
+test("moves lunar spacecraft forward when direction is D", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "D");
+  spacecraft.move("f");
+  expect(spacecraft.z).toBe(-1);
+});
+
+test("moves lunar spacecraft backward when direction is D", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "D");
+  spacecraft.move("b");
+  expect(spacecraft.z).toBe(1);
+});
