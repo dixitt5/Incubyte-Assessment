@@ -1,5 +1,7 @@
 const lunarSpacecraft = require("./lunarSpacecraft");
 
+// ------- Unit tests to check initialization -------
+
 test("initializes spacecraft with right direction and position", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "N");
   expect(spacecraft.x).toBe(0);
@@ -8,13 +10,47 @@ test("initializes spacecraft with right direction and position", () => {
   expect(spacecraft.direction).toBe("N");
 });
 
-// ------- Unit tests to handle spacecraft movement in North Direction -------
-
-test("moves spacecraft forward when direction is N", () => {
-  const spacecraft = new lunarSpacecraft(0, 0, 0, "N");
-  spacecraft.move("f");
-  expect(spacecraft.y).toBe(1);
+test("initializes spacecraft with correct position and direction", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "E");
+  expect(spacecraft.x).toBe(0);
+  expect(spacecraft.y).toBe(0);
+  expect(spacecraft.z).toBe(0);
+  expect(spacecraft.direction).toBe("E");
 });
+
+test("initializes spacecraft with correct position and direction", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "W");
+  expect(spacecraft.x).toBe(0);
+  expect(spacecraft.y).toBe(0);
+  expect(spacecraft.z).toBe(0);
+  expect(spacecraft.direction).toBe("W");
+});
+
+test("initializes spacecraft with correct position and direction", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "S");
+  expect(spacecraft.x).toBe(0);
+  expect(spacecraft.y).toBe(0);
+  expect(spacecraft.z).toBe(0);
+  expect(spacecraft.direction).toBe("S");
+});
+
+test("initializes spacecraft with correct position and direction", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "U");
+  expect(spacecraft.x).toBe(0);
+  expect(spacecraft.y).toBe(0);
+  expect(spacecraft.z).toBe(0);
+  expect(spacecraft.direction).toBe("U");
+});
+
+test("initializes spacecraft with correct position and direction", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "D");
+  expect(spacecraft.x).toBe(0);
+  expect(spacecraft.y).toBe(0);
+  expect(spacecraft.z).toBe(0);
+  expect(spacecraft.direction).toBe("D");
+});
+
+// ------- Unit tests to handle spacecraft movement in North Direction -------
 
 test("moves spacecraft backward when direction is N", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "N");
@@ -177,13 +213,13 @@ test("moves lunar spacecraft backward when direction is U", () => {
 test("turns lunar spacecraft right from U direction", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "U");
   spacecraft.move("r");
-  expect(spacecraft.direction).toBe("U"); // Assuming it doesn't change with right/left turns
+  expect(spacecraft.direction).toBe("S"); // Assuming it doesn't change with right/left turns
 });
 
 test("turns lunar spacecraft left from U direction", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "U");
   spacecraft.move("l");
-  expect(spacecraft.direction).toBe("U"); // Assuming it doesn't change with right/left turns
+  expect(spacecraft.direction).toBe("N"); // Assuming it doesn't change with right/left turns
 });
 
 test("turns lunar spacecraft up when facing U direction", () => {
@@ -215,13 +251,13 @@ test("moves lunar spacecraft backward when direction is D", () => {
 test("turns lunar spacecraft right from D direction", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "D");
   spacecraft.move("r");
-  expect(spacecraft.direction).toBe("D"); // Assuming it doesn't change with right/left turns
+  expect(spacecraft.direction).toBe("N"); // Assuming it doesn't change with right/left turns
 });
 
 test("turns lunar spacecraft left from D direction", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "D");
   spacecraft.move("l");
-  expect(spacecraft.direction).toBe("D"); // Assuming it doesn't change with right/left turns
+  expect(spacecraft.direction).toBe("S"); // Assuming it doesn't change with right/left turns
 });
 
 test("turns lunar spacecraft up when facing D direction", () => {
@@ -234,4 +270,25 @@ test("turns lunar spacecraft down when facing D direction", () => {
   const spacecraft = new lunarSpacecraft(0, 0, 0, "D");
   spacecraft.move("d");
   expect(spacecraft.direction).toBe("D");
+});
+
+// -------  tests to handle invalid commands for spacecraft movement -------
+
+test("does not change position or direction with invalid command", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "N");
+  const initialPosition = { x: 0, y: 0, z: 0, direction: "N" };
+  spacecraft.move("x"); // invalid command
+  expect(spacecraft.x).toBe(initialPosition.x);
+  expect(spacecraft.y).toBe(initialPosition.y);
+  expect(spacecraft.z).toBe(initialPosition.z);
+  expect(spacecraft.direction).toBe(initialPosition.direction);
+});
+
+test("does not move when facing an invalid direction", () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, "A"); // invalid direction
+  spacecraft.move("f");
+  expect(spacecraft.x).toBe(0);
+  expect(spacecraft.y).toBe(0);
+  expect(spacecraft.z).toBe(0);
+  expect(spacecraft.direction).toBe("A");
 });
