@@ -214,6 +214,45 @@ describe("Lunar Spacecraft movements in U direction", () => {
   });
 });
 
+describe("Spacecraft goes out of boundary in X axis", () => {
+  test("spacecraft goes out of boundary in E Direction (positive x axis) ", () => {
+    expect(() => {
+      setupAndMove(10, 0, 0, "E", "f");
+    }).toThrow("Boundary restrictions in X axis");
+  });
+  test("spacecraft goes out of boundary in W Direction (negative x axis) ", () => {
+    expect(() => {
+      setupAndMove(-10, 0, 0, "W", "f");
+    }).toThrow("Boundary restrictions in X axis");
+  });
+});
+
+describe("Spacecraft goes out of boundary in Y axis", () => {
+  test("spacecraft goes out of boundary in N Direction (positive Y axis) ", () => {
+    expect(() => {
+      setupAndMove(0, 10, 0, "N", "f");
+    }).toThrow("Boundary restrictions in Y axis");
+  });
+  test("spacecraft goes out of boundary in S Direction (negative Y axis) ", () => {
+    expect(() => {
+      setupAndMove(0, -10, 0, "S", "f");
+    }).toThrow("Boundary restrictions in Y axis");
+  });
+});
+
+describe("Spacecraft goes out of boundary in Z axis", () => {
+  test("spacecraft goes out of boundary in Upward Direction (positive Z axis) ", () => {
+    expect(() => {
+      setupAndMove(0, 0, 10, "U", "f");
+    }).toThrow("Boundary restrictions in Z axis");
+  });
+  test("spacecraft goes out of boundary in Downword Direction (negative Z axis) ", () => {
+    expect(() => {
+      setupAndMove(0, 0, -10, "D", "f");
+    }).toThrow("Boundary restrictions in Z axis");
+  });
+});
+
 // ------- Unit tests to handle spacecraft movement in down direction -------
 
 describe("Lunar Spacecraft movements in D direction", () => {
