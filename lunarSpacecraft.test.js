@@ -225,6 +225,16 @@ describe("Spacecraft goes out of boundary in X axis", () => {
       setupAndMove(-10, 0, 0, "W", "f");
     }).toThrow("Boundary restrictions in X axis");
   });
+  test("spacecraft goes out of boundary in E Direction (positive x axis) in backward direction", () => {
+    expect(() => {
+      setupAndMove(-10, 0, 0, "E", "b");
+    }).toThrow("Boundary restrictions in X axis");
+  });
+  test("spacecraft goes out of boundary in W Direction (negative x axis) in backward direction", () => {
+    expect(() => {
+      setupAndMove(10, 0, 0, "W", "b");
+    }).toThrow("Boundary restrictions in X axis");
+  });
 });
 
 describe("Spacecraft goes out of boundary in Y axis", () => {
