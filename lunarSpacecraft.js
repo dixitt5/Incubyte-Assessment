@@ -68,6 +68,9 @@ class LunarSpacecraft {
         this.z--;
         break;
     }
+    /**
+     * This checks every axis for boundary conditions, if spacecraft goes out of boundary throws an Error. (Boundary set for every axis is 10)
+     */
     const axes = ["x", "y", "z"];
     const boundary = 10;
 
@@ -102,6 +105,18 @@ class LunarSpacecraft {
       case "D":
         this.z++;
         break;
+    }
+    /**
+     * This checks every axis for boundary conditions, if spacecraft goes out of boundary throws an Error. (Boundary set for every axis is 10)
+     */
+    
+    const axes = ["x", "y", "z"];
+    const boundary = 10;
+    for (let axis of axes) {
+      if (this[axis] > boundary || this[axis] < -boundary) {
+        this[axis] -= 1;
+        throw new Error(`Boundary restrictions in ${axis.toUpperCase()} axis`);
+      }
     }
   }
 
