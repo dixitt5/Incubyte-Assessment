@@ -271,6 +271,16 @@ describe("Spacecraft goes out of boundary in Z axis", () => {
       setupAndMove(0, 0, -10, "D", "f");
     }).toThrow("Boundary restrictions in Z axis");
   });
+  test("spacecraft goes out of boundary in Upward Direction (positive Z axis) in backward direction", () => {
+    expect(() => {
+      setupAndMove(0, 0, 10, "D", "b");
+    }).toThrow("Boundary restrictions in Z axis");
+  });
+  test("spacecraft goes out of boundary in Downword Direction (negative Z axis) in backward direction", () => {
+    expect(() => {
+      setupAndMove(0, 0, -10, "U", "b");
+    }).toThrow("Boundary restrictions in Z axis");
+  });
 });
 
 // ------- Unit tests to handle spacecraft movement in down direction -------
