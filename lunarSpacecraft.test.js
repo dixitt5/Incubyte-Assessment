@@ -248,6 +248,16 @@ describe("Spacecraft goes out of boundary in Y axis", () => {
       setupAndMove(0, -10, 0, "S", "f");
     }).toThrow("Boundary restrictions in Y axis");
   });
+  test("spacecraft goes out of boundary in N Direction (positive Y axis) in backward direction", () => {
+    expect(() => {
+      setupAndMove(0, -10, 0, "N", "b");
+    }).toThrow("Boundary restrictions in Y axis");
+  });
+  test("spacecraft goes out of boundary in S Direction (negative Y axis) in backward direction", () => {
+    expect(() => {
+      setupAndMove(0, 10, 0, "S", "b");
+    }).toThrow("Boundary restrictions in Y axis");
+  });
 });
 
 describe("Spacecraft goes out of boundary in Z axis", () => {
