@@ -21,181 +21,53 @@ class LunarSpacecraft {
    * Process a command to move or change direction of the spacecraft.
    * @param {string} command - The command to process (f, b, l, r, u, d).
    */
+
   move(command) {
     switch (command) {
       case "f":
-        this.forward();
-        break;
       case "b":
-        this.backward();
+        this.moveForwardOrBackward(command);
         break;
       case "l":
-        this.turnLeft();
-        break;
       case "r":
-        this.turnRight();
+        this.turnLeftOrRight(command);
         break;
       case "u":
-        this.turnUp();
+        this.direction = "U";
         break;
       case "d":
-        this.turnDown();
+        this.direction = "D";
         break;
     }
-    
   }
 
-  checkForObstacles() {
-    const obstacles = [
-      { x: 1, y: 0, z: 0 },
-      { x: -3, y: 7, z: 2 },
-      { x: 4, y: 6, z: 0 },
-      { x: -3, y: 3, z: 2 },
-    ];
-    
-    for (const obstacle of obstacles) {
-      if (
-        this.x == obstacle.x &&
-        this.y == obstacle.y &&
-        this.z == obstacle.z
-      ) {
-        throw new Error("Obstacle Encountered.");
-      }
-    }
+  moveForwardOrBackward(command) {
+    const moveMap = new Map([
+      ["N", () => (command === "f" ? this.y++ : this.y--)],
+      ["E", () => (command === "f" ? this.x++ : this.x--)],
+      ["S", () => (command === "f" ? this.y-- : this.y++)],
+      ["W", () => (command === "f" ? this.x-- : this.x++)],
+      ["U", () => (command === "f" ? this.z++ : this.z--)],
+      ["D", () => (command === "f" ? this.z-- : this.z++)],
+    ]);
+
+    moveMap.get(this.direction)();
   }
 
   /**
-   * Move the spacecraft forward based on its current direction.
+   * Turn the spacecraft to left and right.
    */
-  forward() {
-    switch (this.direction) {
-      case "N":
-        this.y++;
-        break;
-      case "E":
-        this.x++;
-        break;
-      case "S":
-        this.y--;
-        break;
-      case "W":
-        this.x--;
-        break;
-      case "U":
-        this.z++;
-        break;
-      case "D":
-        this.z--;
-        break;
-    }
+  turnLeftOrRight(command) {
+    const turnMap = new Map([
+      ["N", command === "l" ? "W" : "E"],
+      ["E", command === "l" ? "N" : "S"],
+      ["S", command === "l" ? "E" : "W"],
+      ["W", command === "l" ? "S" : "N"],
+      ["U", command === "l" ? "N" : "S"],
+      ["D", command === "l" ? "S" : "N"],
+    ]);
 
-    /**
-     * This checks every axis for boundary conditions, if spacecraft goes out of boundary throws an Error. (Boundary set for every axis is 10)
-     */
-    const axes = ["x", "y", "z"];
-    const boundary = 10;
-
-    for (let axis of axes) {
-      if (this[axis] > boundary || this[axis] < -boundary) {
-        this[axis] -= 1;
-        throw new Error(`Boundary restrictions in ${axis.toUpperCase()} axis`);
-      }
-    }
-    this.checkForObstacles();
-
-  }
-
-  /**
-   * Move the spacecraft backward based on its current direction.
-   */
-  backward() {
-    switch (this.direction) {
-      case "N":
-        this.y--;
-        break;
-      case "E":
-        this.x--;
-        break;
-      case "S":
-        this.y++;
-        break;
-      case "W":
-        this.x++;
-        break;
-      case "U":
-        this.z--;
-        break;
-      case "D":
-        this.z++;
-        break;
-    }
-    /**
-     * This checks every axis for boundary conditions, if spacecraft goes out of boundary throws an Error. (Boundary set for every axis is 10)
-     */
-    
-    const axes = ["x", "y", "z"];
-    const boundary = 10;
-    for (let axis of axes) {
-      if (this[axis] > boundary || this[axis] < -boundary) {
-        this[axis] -= 1;
-        throw new Error(`Boundary restrictions in ${axis.toUpperCase()} axis`);
-      }
-    }
-
-    this.checkForObstacles();
-
-  }
-
-  /**
-   * Turn the spacecraft left based on its current direction.
-   */
-  turnLeft() {
-    switch (this.direction) {
-      case "N":
-        this.direction = "W";
-        break;
-      case "E":
-        this.direction = "N";
-        break;
-      case "S":
-        this.direction = "E";
-        break;
-      case "W":
-        this.direction = "S";
-        break;
-      case "U":
-        this.direction = "N"; // Change in Orientation when facing Up
-        break;
-      case "D":
-        this.direction = "S"; // Change in Orientation when facing Down
-        break;
-    }
-  }
-
-  /**
-   * Turn the spacecraft right based on its current direction.
-   */
-  turnRight() {
-    switch (this.direction) {
-      case "N":
-        this.direction = "E";
-        break;
-      case "E":
-        this.direction = "S";
-        break;
-      case "S":
-        this.direction = "W";
-        break;
-      case "W":
-        this.direction = "N";
-        break;
-      case "U":
-        this.direction = "S"; // Change in Orientation when facing Up
-        break;
-      case "D":
-        this.direction = "N"; // Change in Orientation when facing Down
-        break;
-    }
+    this.direction = turnMap.get(this.direction);
   }
 
   /**
