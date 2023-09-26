@@ -23,6 +23,9 @@ class LunarSpacecraft {
    */
 
   move(command) {
+    if (!["f", "b", "l", "r", "u", "d"].includes(command)) {
+      throw new Error("Invalid command");
+    }
     switch (command) {
       case "f":
       case "b":
@@ -39,6 +42,7 @@ class LunarSpacecraft {
         this.direction = "D";
         break;
     }
+    this.checkBoundary();
   }
 
   moveForwardOrBackward(command) {
@@ -82,6 +86,16 @@ class LunarSpacecraft {
    */
   turnDown() {
     this.direction = "D";
+  }
+   checkBoundary() {
+    const boundary = 10;
+    const axes= ["x", "y", "z"];
+    for (let axis of axes) {
+      if (this[axis] > boundary || this[axis] < -boundary) {
+        this[axis] -= 1;
+        throw new Error(`Boundary restrictions in ${axis.toUpperCase()} axis`);
+      }
+    }
   }
 }
 
