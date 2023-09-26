@@ -49,7 +49,7 @@ Follow the instructions to get the project running on your local machine for dev
 1. Run the program:
 
    ```
-   node index.js
+   node src/index.js
    ```
 
 2. Adhere to the on-screen instructions to establish the spacecraft's starting orientation and input maneuvering directives.
