@@ -1,6 +1,6 @@
 # Chandrayaan 3 Lunar Craft: Galactic Space Craft Control (Assessment)
 
-A command-line interface tool designed for 3D navigation of a lunar spacecraft. Users set an initial orientation and input a series of navigation commands. After execution, the application reveals the spacecraft's ending coordinates and orientation.
+A command-line interface tool designed for 3D navigation of a lunar spacecraft. Users set an initial orientation and input a series of navigation commands. After execution, the application reveals the spacecraft's ending coordinates and orientation. The application is implemented using TypeScript.
 
 ## Table of Contents
 
@@ -19,6 +19,7 @@ Follow the instructions to get the project running on your local machine for dev
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) and NPM
+- [TypeScript](https://www.typescriptlang.org/)
 
 ## Installation
 
@@ -37,6 +38,10 @@ Follow the instructions to get the project running on your local machine for dev
 3. Install the required packages:
    ```
    npm install
+   ```
+4. Compile TypeScript files to JavaScript:
+   ```
+   tsc
    ```
 
 ## Usage
@@ -61,6 +66,7 @@ To ensure the reliability of the navigation system, unit tests are provided. To 
 ## Built With
 
 - [Node.js](https://nodejs.org/) - The runtime used
+- [TypeScript](https://www.typescriptlang.org/) - Programming language used for application development
 - [Jest](https://jestjs.io/) - Testing framework
 
 ## Authors
