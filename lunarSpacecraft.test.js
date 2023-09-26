@@ -7,10 +7,10 @@ function setupAndMove(x, y, z, direction, command) {
 }
 
 function assertPositionAndDirection(spacecraft, x, y, z, direction) {
-  expect(spacecraft.x).toBe(x);
-  expect(spacecraft.y).toBe(y);
-  expect(spacecraft.z).toBe(z);
-  expect(spacecraft.direction).toBe(direction);
+  expect(spacecraft).toHaveProperty('x',x);
+  expect(spacecraft).toHaveProperty('y',y);
+  expect(spacecraft).toHaveProperty('z',z);
+  expect(spacecraft).toHaveProperty('direction',direction);
 }
 
 // ------- Unit tests to check initialization -------
@@ -42,6 +42,13 @@ describe("Lunar Spacecraft initialization", () => {
       );
     });
   });
+});
+
+test('should throw an error for an invalid command', () => {
+  const spacecraft = new lunarSpacecraft(0, 0, 0, 'N');
+  
+  // We expect an error to be thrown when an invalid command is passed
+  expect(() => spacecraft.move('x')).toThrowError('Invalid command');
 });
 
 // ------- Unit tests to handle spacecraft movement in North Direction -------
