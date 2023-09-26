@@ -42,6 +42,26 @@ class LunarSpacecraft {
         this.turnDown();
         break;
     }
+    
+  }
+
+  checkForObstacles() {
+    const obstacles = [
+      { x: 1, y: 0, z: 0 },
+      { x: -3, y: 7, z: 2 },
+      { x: 4, y: 6, z: 0 },
+      { x: -3, y: 3, z: 2 },
+    ];
+    
+    for (const obstacle of obstacles) {
+      if (
+        this.x == obstacle.x &&
+        this.y == obstacle.y &&
+        this.z == obstacle.z
+      ) {
+        throw new Error("Obstacle Encountered.");
+      }
+    }
   }
 
   /**
@@ -68,6 +88,7 @@ class LunarSpacecraft {
         this.z--;
         break;
     }
+
     /**
      * This checks every axis for boundary conditions, if spacecraft goes out of boundary throws an Error. (Boundary set for every axis is 10)
      */
@@ -80,6 +101,8 @@ class LunarSpacecraft {
         throw new Error(`Boundary restrictions in ${axis.toUpperCase()} axis`);
       }
     }
+    this.checkForObstacles();
+
   }
 
   /**
@@ -118,6 +141,9 @@ class LunarSpacecraft {
         throw new Error(`Boundary restrictions in ${axis.toUpperCase()} axis`);
       }
     }
+
+    this.checkForObstacles();
+
   }
 
   /**

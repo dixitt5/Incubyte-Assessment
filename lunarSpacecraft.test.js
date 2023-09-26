@@ -19,6 +19,12 @@ function checkLimits(x, y, z, direction, command, message) {
   }).toThrow(message);
 }
 
+function checkObstacles(x, y, z, direction, command, message) {
+  expect(() => {
+    setupAndMove(x, y, z, direction, command);
+  }).toThrow(message);
+}
+
 // ------- Unit tests to check initialization -------
 
 describe("Lunar Spacecraft initialization", () => {
@@ -298,6 +304,14 @@ describe("Lunar Spacecraft movements in D direction", () => {
     assertPositionAndDirection(spacecraft, 0, 0, 0, "D");
   });
 });
+
+// -------  tests to check obstacle detection -------
+
+// describe("Lunar spacecraft hits obstacle", () => {
+//   it("should hit obstacle ", () => {
+//     checkObstacles(0, 0, 0, "E", "f", "Obstacle Encountered.");
+//   });
+// });
 
 // -------  tests to handle invalid commands for spacecraft movement -------
 
