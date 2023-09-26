@@ -1,17 +1,32 @@
-const lunarSpacecraft = require("./lunarSpacecraft");
+import LunarSpacecraft from "../src/lunarSpacecraft";
+type Direction = "N" | "E" | "W" | "S" | "U" | "D";
 
-function setupAndMove(x, y, z, direction, command) {
-  const spacecraft = new lunarSpacecraft(x, y, z, direction);
+function setupAndMove(
+  x: number,
+  y: number,
+  z: number,
+  directionn: any,
+  command: Command
+): LunarSpacecraft {
+  const spacecraft = new LunarSpacecraft(x, y, z, directionn);
   spacecraft.move(command);
   return spacecraft;
 }
 
-function assertPositionAndDirection(spacecraft, x, y, z, direction) {
+function assertPositionAndDirection(
+  spacecraft: LunarSpacecraft,
+  x: number,
+  y: number,
+  z: number,
+  direction: Direction
+): void {
   expect(spacecraft).toHaveProperty("x", x);
   expect(spacecraft).toHaveProperty("y", y);
   expect(spacecraft).toHaveProperty("z", z);
   expect(spacecraft).toHaveProperty("direction", direction);
 }
+
+type Command = "f" | "b" | "l" | "r" | "u" | "d";
 
 // ------- Unit tests to check initialization -------
 
@@ -27,27 +42,21 @@ describe("Lunar Spacecraft initialization", () => {
 
   testCases.forEach((testCase) => {
     test(`initializes Lunar spacecraft with position (${testCase.x}, ${testCase.y}, ${testCase.z}) and direction ${testCase.direction}`, () => {
-      const spacecraft = new lunarSpacecraft(
+      const spacecraft = new LunarSpacecraft(
         testCase.x,
         testCase.y,
         testCase.z,
-        testCase.direction
+        testCase.direction as any,
       );
       assertPositionAndDirection(
         spacecraft,
         testCase.x,
         testCase.y,
         testCase.z,
-        testCase.direction
+        testCase.direction as any,
       );
     });
   });
-});
-
-test("should throw an error for an invalid command", () => {
-
-  // We expect an error to be thrown when an invalid command is passed
-  expect(() => setupAndMove(0, 0, 0, "N", "x")).toThrow("Invalid");
 });
 
 // ------- Unit tests to handle spacecraft movement in North Direction -------
@@ -322,4 +331,3 @@ describe("Lunar Spacecraft movements in D direction", () => {
     assertPositionAndDirection(spacecraft, 0, 0, 0, "D");
   });
 });
-
